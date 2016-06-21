@@ -4,37 +4,54 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
- * Created by Administrator on 2016/6/13 0013.
+ * Created by Administrator on 2016/6/21 0021.
  */
 public class CustomView extends View {
+    int length;
+    Paint mCirclePaint=null;
+    Paint mArcPaint=null;
+    Paint mTextPaint=null;
+    String text="Android Skills";
+    public CustomView(Context context) {
+        super(context);
+    }
 
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mCirclePaint = new Paint();
+        mCirclePaint.setColor(getResources().getColor(android.R.color.holo_blue_dark));
 
+        mArcPaint = new Paint();
+        mArcPaint.setStyle(Paint.Style.STROKE);
+        mArcPaint.setStrokeWidth(40);
+        mArcPaint.setColor(getResources().getColor(android.R.color.holo_blue_dark));
+
+        mTextPaint = new Paint();
+        mTextPaint.setColor(Color.BLACK);
+        mTextPaint.setTextSize(32);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-       Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setAntiAlias(true);
-        //绘制一个圆形
+        //画圆
+        length = getMeasuredWidth();
+        int mCircleXY=length/2;
+        int mRadius=length/5;
+        canvas.drawCircle(mCircleXY,mCircleXY,mRadius,mCirclePaint);
+        //绘制文字
+        canvas.drawText(text,0,text.length(),mCircleXY-mRadius,mCircleXY+text.length(),mTextPaint);
+        Log.d("CustomView", text.length()+"");
+        //绘制圆弧
+       RectF mRectF= new RectF(length / 10, length / 10, length * 9 / 10, length * 9 / 10);
+        canvas.drawArc(mRectF,0,270,false,mArcPaint);
 
-        canvas.drawCircle(100,100,50,paint);
-        //去掉锯齿
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
-        //绘制椭圆
-        paint.setColor(Color.YELLOW);
-        canvas.drawOval(200,200,500,300,paint);
-        paint.setColor(Color.BLUE);
-        //绘制文本
-        paint.setTextSize(50);
-        canvas.drawText("zhuzhonglang",100,400,paint);
+
     }
 }

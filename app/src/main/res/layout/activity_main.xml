@@ -3,9 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
   >
 
-   <com.lang.customview.CustomView
+   <Button
+       android:id="@+id/btnTrain"
+       android:text="TraimView"
+       android:textSize="20sp"
        android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+       android:layout_height="wrap_content" />
+   <Button
+       android:id="@+id/btnCustom"
+       android:text="CustomView"
+       android:textSize="20sp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
 </LinearLayout>
